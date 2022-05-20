@@ -1,0 +1,13 @@
+<% if @tweet.errors.any? %>
+    <%# This removes any error messages that were previously generated. %>
+    document.querySelector('#error_explanation') ? document.querySelector('#error_explanation').remove() : null ;
+    <%# This selects the `<form>` in and dynamically injects the `app/views/shared/_validation-messages.html.erb` partial. %>
+    document.querySelector('#tweets-form').insertAdjacentHTML('afterbegin', '<%= escape_javascript(render "shared/validation-messages", object: @tweet) %>');
+<% else %>
+    <%# This removes any error messages that were previously generated. %>
+    document.querySelector('#error_explanation') ? document.querySelector('#error_explanation').remove() : null ;
+    <%# This selects `<div id="tweets">` and dynamically injects the `app/views/tweets/_tweet.html.erb` partial. %>
+    document.querySelector('#tweets').insertAdjacentHTML('afterbegin', '<%= escape_javascript(render @tweet) %>') ;
+    <%# This selects the `<form>` and resets the text area. %>
+    document.querySelector('#tweets-form').reset();
+<% end %>

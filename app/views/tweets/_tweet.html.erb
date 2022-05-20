@@ -1,0 +1,30 @@
+<article class="card mb-3 post post-<%= tweet.id %>">
+    <%
+=begin%>
+ <div class="card-header">
+        <h3 class="mb-0">Tweet</h3>
+    </div> 
+<%
+=end%>
+    <div class="card-body">
+
+            <%= image_tag tweet.user.image, style:"width:40px;height:40px",class:"rounded-circle" if tweet.user.image.attached? %>
+ 
+        <small class="d-inline-block mb-3 text-secondary border-bottom">Posted by: <%= tweet.user.name %> <%= time_ago_in_words(tweet.created_at) %> ago.</small> 
+        <h4><p class="card-text"><%= tweet.tweet %></p></h4>
+        <%if current_user.id == tweet.user_id %>
+            <%= link_to 'Edit', edit_tweet_path(tweet), class: "btn btn-sm btn-outline-primary" %>
+            <%= link_to 'Destroy', tweet, method: :delete, remote: true, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-outline-danger" %>
+            <%= link_to 'Comment', tweet ,  class: "btn btn-sm btn-outline-primary"%>
+        <%else%>
+            <%= link_to 'Comment', tweet %>
+        <%end%>
+        <p></p>
+        <!-- Comment -->
+        <div class="container">
+            <div id="com">
+                <%= render tweet.comments %>
+            </div>
+        </div>
+    </div>
+</article><br>

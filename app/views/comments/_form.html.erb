@@ -1,0 +1,8 @@
+<%= form_with(model: [ @tweet, @tweet.comments.build], local: false, id:"comments-form" ) do |f| %>
+    <div class="form-group" >
+        <%= f.text_area :body, class: "form-control" , placeholder:"Add a comment:" %>
+    </div>
+    <p>
+        <%= f.submit %>
+    </p>
+<% end %>

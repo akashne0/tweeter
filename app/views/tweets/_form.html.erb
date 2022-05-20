@@ -1,0 +1,15 @@
+<%= form_with(model: @tweet, local: false, id: "tweets-form" ) do |f| %>
+  <%= render "shared/validation-messages", object: f.object %>
+
+    <div class="form-group" >
+       <h3><%= f.label :tweet %></h3>
+        <%= f.text_area :tweet, class: "form-control" , placeholder:"What's happening?" %>
+    </div>
+   <div class="btn-group">
+        <%= f.submit class: "btn btn-success" %>
+        <%# NOTE Only show the delete button on the edit page. Otherwise it would appear when adding a new post. %>
+        <% if params[:action] == 'edit' && current_user %>
+            <%= link_to "Delete Tweet", tweet_path(@tweet), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>        
+        <% end %>
+    </div>
+<% end %>

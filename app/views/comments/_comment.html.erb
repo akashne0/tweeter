@@ -1,0 +1,8 @@
+<p>
+    <strong>Comment:</strong>
+    <%= comment.body %>
+</p>
+<%if current_user || tweet.user %>
+<%= link_to "Del", [comment.tweet, comment], :confirm => 'Are you sure?', :method => :delete, remote: true%>
+<%end%>
+<hr>
